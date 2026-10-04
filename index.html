@@ -1,1 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Avika Ratu Aisyah ♡</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070711;--card:rgba(18,18,35,.72);--line:rgba(255,255,255,.11);
+  --pink:#ff5fa2;--purple:#9b7bff;--white:#f8f7ff;--muted:#aaa8bc;
+}
+body{
+  min-height:100vh;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--white);
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,95,162,.18),transparent 28%),
+    radial-gradient(circle at 85% 25%,rgba(155,123,255,.18),transparent 30%),
+    linear-gradient(145deg,#05050c,#0b0815 55%,#090711);
+  overflow-x:hidden;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:28px}
+.screen.active{display:flex}
+.glow{position:fixed;width:320px;height:320px;border-radius:50%;filter:blur(90px);opacity:.18;pointer-events:none;background:var(--pink);top:-120px;left:-100px}
+.glow.two{background:var(--purple);top:auto;left:auto;right:-130px;bottom:-130px}
 
+.card{
+  width:min(900px,100%);padding:34px;border:1px solid var(--line);border-radius:28px;
+  background:var(--card);backdrop-filter:blur(22px);box-shadow:0 30px 100px rgba(0,0,0,.45)
+}
+.center{text-align:center}
+.eyebrow{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#aaa6bd;margin-bottom:13px}
+h1{font-size:clamp(34px,7vw,68px);line-height:1.02;letter-spacing:-2px}
+h2{font-size:clamp(26px,5vw,42px);margin-bottom:10px}
+p{color:var(--muted);line-height:1.7}
+.gradient{background:linear-gradient(90deg,#fff,var(--pink),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+input{
+  width:100%;padding:16px 18px;border-radius:15px;border:1px solid var(--line);
+  background:rgba(255,255,255,.06);color:white;outline:none;text-align:center;font-size:24px;letter-spacing:9px;margin:22px 0 10px
+}
+input:focus{border-color:rgba(255,95,162,.6)}
+.primary,.secondary{
+  border:0;border-radius:15px;padding:14px 22px;font-weight:700;color:white;transition:.2s
+}
+.primary{background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 12px 30px rgba(255,95,162,.22)}
+.secondary{background:rgba(255,255,255,.07);border:1px solid var(--line)}
+button:hover{transform:translateY(-2px)}
+.error{height:22px;color:#ff7c9f;font-size:13px}
+.dots{display:flex;gap:7px;justify-content:center;margin:22px 0}
+.dot{width:7px;height:7px;border-radius:50%;background:#3a3948}
+.dot.on{background:var(--pink);box-shadow:0 0 12px var(--pink)}
+.game-head{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:22px}
+.badge{padding:7px 11px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#c8c5d4}
+.game-area{min-height:350px;display:flex;align-items:center;justify-content:center}
+.game-content{width:min(650px,100%);text-align:center}
+.number-input{max-width:260px;letter-spacing:2px;font-size:18px}
+.feedback{min-height:28px;margin:15px 0;color:#ddd}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:470px;margin:auto}
+.memory{
+  aspect-ratio:1;border:1px solid var(--line);border-radius:16px;background:#121222;
+  color:transparent;font-size:28px;transition:.25s
+}
+.memory.open{background:rgba(255,95,162,.13);color:white}
+.heart-zone{
+  position:relative;height:310px;max-width:650px;margin:auto;overflow:hidden;
+  border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.15)
+}
+.heart{position:absolute;font-size:30px;background:none;border:0;animation:fall linear forwards}
+@keyframes fall{from{transform:translateY(-50px) rotate(0)}to{transform:translateY(360px) rotate(180deg)}}
+.score{font-weight:800;color:var(--pink)}
+.envelope-wrap{text-align:center}
+.envelope{
+  width:min(390px,90vw);height:245px;margin:28px auto 10px;position:relative;
+  cursor:pointer;perspective:900px;filter:drop-shadow(0 25px 35px rgba(0,0,0,.4))
+}
+.env-back{position:absolute;inset:0;background:linear-gradient(145deg,#6e2048,#321d50);border-radius:16px}
+.env-paper{
+  position:absolute;left:7%;width:86%;height:88%;top:5%;background:#fffafc;color:#281c28;
+  border-radius:10px;padding:24px 20px;text-align:left;z-index:2;transition:transform .8s ease;box-shadow:0 8px 20px rgba(0,0,0,.2)
+}
+.env-paper h3{margin-bottom:8px}
+.env-front{position:absolute;inset:0;z-index:4;overflow:hidden}
+.env-front:before,.env-front:after{content:"";position:absolute;bottom:0;width:70%;height:100%;background:#512044}
+.env-front:before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}
+.env-front:after{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.env-flap{
+  position:absolute;z-index:5;top:0;left:0;width:100%;height:55%;
+  background:linear-gradient(145deg,#8a2e5d,#47205a);clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;transition:transform .8s ease
+}
+.envelope.open .env-flap{transform:rotateX(180deg)}
+.envelope.open .env-paper{transform:translateY(-135px)}
+.tap{font-size:13px;color:#8f8ca0}
+.final{padding:25px 0 70px;display:none}
+.final.active{display:block}
+.final-inner{width:min(1000px,92%);margin:auto}
+.hero-final{text-align:center;padding:75px 0 45px}
+.photo{
+  width:220px;height:220px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 30px;
+  border:5px solid rgba(255,255,255,.12);box-shadow:0 0 0 12px rgba(255,95,162,.05),0 25px 60px rgba(0,0,0,.45)
+}
+.photo-fallback{display:none}
+.letter{
+  margin-top:25px;padding:34px;border:1px solid var(--line);border-radius:25px;background:rgba(255,255,255,.045);
+  line-height:1.9;color:#d9d7e3
+}
+.letter p{margin-bottom:16px}
+.cake-area{text-align:center;margin:50px 0}
+.cake{position:relative;width:190px;height:145px;margin:65px auto 0}
+.plate{position:absolute;bottom:0;left:-15px;width:220px;height:17px;border-radius:50%;background:#d9d5df}
+.cake-body{position:absolute;bottom:17px;left:10px;width:170px;height:88px;border-radius:12px 12px 18px 18px;background:linear-gradient(#ff87b6,#d94c88);box-shadow:inset 0 -10px rgba(0,0,0,.08)}
+.cream{position:absolute;bottom:85px;left:10px;width:170px;height:25px;border-radius:50%;background:#fff}
+.candle{position:absolute;bottom:105px;left:86px;width:18px;height:48px;border-radius:6px;background:linear-gradient(90deg,#b9a2ff,#ffb3d2)}
+.flame{position:absolute;left:88px;bottom:151px;width:15px;height:23px;background:#ffd36a;border-radius:50% 50% 45% 45%;box-shadow:0 0 25px #ffb52e;animation:flicker .65s infinite alternate}
+@keyframes flicker{to{transform:scale(.82) translateY(2px);opacity:.75}}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:20}
+.confetti i{position:absolute;top:-20px;width:7px;height:14px;animation:conf 3s linear forwards}
+@keyframes conf{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.music{
+  position:fixed;right:18px;bottom:18px;z-index:30;width:52px;height:52px;border-radius:50%;
+  border:1px solid var(--line);background:rgba(20,18,35,.85);color:white;backdrop-filter:blur(12px)
+}
+@media(max-width:600px){
+ .card{padding:24px;border-radius:22px}
+ .screen{padding:16px}
+ .game-area{min-height:320px}
+ .memory-grid{gap:8px}
+ .memory{border-radius:12px}
+ .letter{padding:23px}
+}
+</style>
+</head>
+<body>
+<div class="glow"></div><div class="glow two"></div>
+<audio id="music" src="musik.mp3" loop preload="auto"></audio>
+<button class="music" id="musicBtn" title="Musik">♪</button>
+
+<section id="pinScreen" class="screen active">
+  <div class="card center">
+    <div class="eyebrow">A private birthday experience</div>
+    <h1 class="gradient">For Avika</h1>
+    <p style="margin-top:14px">Masukkan PIN untuk membuka kejutan kecil ini.</p>
+    <input id="pin" inputmode="numeric" maxlength="4" placeholder="••••">
+    <div class="error" id="pinError"></div>
+    <button class="primary" onclick="checkPin()">Buka kejutan</button>
+    <div class="dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div>
+  </div>
+</section>
+
+<section id="gameScreen" class="screen">
+  <div class="card">
+    <div class="game-head">
+      <div><div class="eyebrow" id="gameLabel">Challenge 01</div><h2 id="gameTitle">Tebak Angka</h2></div>
+      <div class="badge" id="gameCount">1 / 3</div>
+    </div>
+    <div class="game-area"><div class="game-content" id="gameContent"></div></div>
+  </div>
+</section>
+
+<section id="envelopeScreen" class="screen">
+  <div class="card center envelope-wrap">
+    <div class="eyebrow">One last thing</div>
+    <h2 class="gradient">Ada sesuatu untukmu</h2>
+    <p>Klik amplopnya dan buka perlahan.</p>
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="env-back"></div>
+      <div class="env-paper"><h3>Untuk Avika ♡</h3><p>Aku punya sedikit pesan yang ingin kusampaikan...</p></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+    </div>
+    <div class="tap" id="envHint">KLIK AMPLOP</div>
+    <button class="primary hidden" id="continueBtn" onclick="showFinal()">Lanjut</button>
+  </div>
+</section>
+
+<section id="finalScreen" class="final">
+  <div class="final-inner">
+    <div class="hero-final">
+      <div class="eyebrow">Happy Birthday</div>
+      <img class="photo" src="foto.jpg" alt="Avika Ratu Aisyah"
+           onerror="this.style.display='none';document.getElementById('photoError').style.display='block'">
+      <div id="photoError" class="hidden"><p>Foto belum ditemukan. Pastikan file bernama <b>foto.jpg</b>.</p></div>
+      <h1 class="gradient">Avika Ratu Aisyah</h1>
+      <p style="font-size:18px;margin-top:15px">Selamat ulang tahun. Semoga hari ini menjadi awal dari banyak hal baik.</p>
+    </div>
+
+    <div class="cake-area">
+      <div class="eyebrow">Make a wish</div>
+      <div class="cake">
+        <div class="flame"></div><div class="candle"></div><div class="cream"></div>
+        <div class="cake-body"></div><div class="plate"></div>
+      </div>
+    </div>
+
+    <div class="letter">
+      <p><b>Untuk Avika Ratu Aisyah,</b></p>
+      <p>Selamat ulang tahun! 🎂</p>
+      <p>
+        Hari ini adalah hari spesial kamu. Semoga bertambahnya usia membawa lebih banyak
+        kebahagiaan, ketenangan, kesehatan, dan kesempatan untuk mewujudkan semua hal yang kamu inginkan.
+      </p>
+      <p>
+        Jangan lupa untuk tetap menjadi diri kamu sendiri. Terus melangkah, terus berkembang,
+        dan jangan terlalu keras kepada diri sendiri ketika sesuatu belum berjalan sesuai rencana.
+      </p>
+      <p>
+        Semoga orang-orang baik selalu berada di sekelilingmu, senyum kamu selalu punya alasan,
+        dan setiap harapan yang kamu simpan pelan-pelan menemukan jalannya.
+      </p>
+      <p>
+        Terima kasih sudah menjadi seseorang yang begitu berarti.
+        Semoga tahun ini jauh lebih indah dari tahun-tahun sebelumnya.
+      </p>
+      <p style="margin-top:28px"><b>Happy birthday, Avika. ♡</b></p>
+      <p style="text-align:right;color:#aaa8bc">— Fahmi Anugrah Wijaya</p>
+    </div>
+
+    <div class="center" style="margin-top:35px">
+      <button class="primary" onclick="celebrate()">Rayakan lagi ✨</button>
+    </div>
+  </div>
+</section>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+const PIN="1810";
+let game=1, numberTarget=0, memoryOpen=[], memoryMatched=[], catchScore=0, heartTimer=null;
+
+const pinScreen=document.getElementById("pinScreen");
+const gameScreen=document.getElementById("gameScreen");
+const envelopeScreen=document.getElementById("envelopeScreen");
+const finalScreen=document.getElementById("finalScreen");
+const music=document.getElementById("music");
+
+document.getElementById("pin").addEventListener("keydown",e=>{if(e.key==="Enter")checkPin()});
+
+function checkPin(){
+  const input=document.getElementById("pin").value;
+  const error=document.getElementById("pinError");
+  if(input===PIN){
+    pinScreen.classList.remove("active");
+    gameScreen.classList.add("active");
+    music.play().catch(()=>{});
+    loadGame(1);
+  }else{
+    error.textContent="PIN salah. Coba lagi.";
+    document.getElementById("pin").value="";
+  }
+}
+
+function loadGame(n){
+  game=n;
+  document.getElementById("gameCount").textContent=n+" / 3";
+  document.getElementById("gameLabel").textContent="Challenge 0"+n;
+  const content=document.getElementById("gameContent");
+  if(n===1) numberGame(content);
+  if(n===2) memoryGame(content);
+  if(n===3) catchGame(content);
+}
+
+function nextGame(){
+  if(game<3) loadGame(game+1);
+  else{
+    gameScreen.classList.remove("active");
+    envelopeScreen.classList.add("active");
+  }
+}
+
+function numberGame(el){
+  numberTarget=Math.floor(Math.random()*20)+1;
+  el.innerHTML=`
+    <div style="font-size:55px;margin-bottom:10px">?</div>
+    <p>Tebak angka rahasia dari <b>1 sampai 20</b>.</p>
+    <input id="guess" class="number-input" type="number" min="1" max="20" placeholder="Angka">
+    <div class="feedback" id="guessFeedback"></div>
+    <button class="primary" onclick="guessNumber()">Tebak</button>`;
+}
+function guessNumber(){
+  const v=Number(document.getElementById("guess").value);
+  const f=document.getElementById("guessFeedback");
+  if(!v){f.textContent="Masukkan angka dulu.";return}
+  if(v===numberTarget){f.textContent="Benar! 🎉";setTimeout(nextGame,700)}
+  else f.textContent=v<numberTarget?"Terlalu kecil.":"Terlalu besar.";
+}
+
+function memoryGame(el){
+  const symbols=["♡","♡","★","★","✦","✦","☾","☾"];
+  symbols.sort(()=>Math.random()-.5);
+  memoryOpen=[];memoryMatched=[];
+  el.innerHTML=`<p style="margin-bottom:20px">Temukan semua pasangan simbol.</p>
+    <div class="memory-grid">${symbols.map((s,i)=>`<button class="memory" data-i="${i}" data-v="${s}" onclick="flipMemory(this)">?</button>`).join("")}</div>
+    <div class="feedback" id="memoryFeedback"></div>`;
+}
+function flipMemory(btn){
+  const i=Number(btn.dataset.i);
+  if(memoryMatched.includes(i)||memoryOpen.includes(i)||memoryOpen.length===2)return;
+  btn.classList.add("open");btn.textContent=btn.dataset.v;memoryOpen.push(i);
+  if(memoryOpen.length===2){
+    const [a,b]=memoryOpen;
+    const buttons=[...document.querySelectorAll(".memory")];
+    if(buttons[a].dataset.v===buttons[b].dataset.v){
+      memoryMatched.push(a,b);memoryOpen=[];
+      if(memoryMatched.length===8){document.getElementById("memoryFeedback").textContent="Perfect! 🎉";setTimeout(nextGame,800)}
+    }else{
+      setTimeout(()=>{
+        buttons[a].classList.remove("open");buttons[b].classList.remove("open");
+        buttons[a].textContent=buttons[b].textContent="?";memoryOpen=[];
+      },650);
+    }
+  }
+}
+
+function catchGame(el){
+  catchScore=0;
+  el.innerHTML=`
+    <p>Tekan hati yang jatuh sebanyak mungkin dalam <b>15 detik</b>.</p>
+    <p style="margin:10px 0">Score: <span class="score" id="score">0</span> &nbsp; • &nbsp; Waktu: <span class="score" id="time">15</span></p>
+    <div class="heart-zone" id="heartZone"></div>`;
+  let time=15;
+  heartTimer=setInterval(()=>{
+    time--;document.getElementById("time").textContent=time;
+    spawnHeart();
+    if(time<=0){
+      clearInterval(heartTimer);clearInterval(window.spawnTimer);
+      setTimeout(nextGame,700);
+    }
+  },1000);
+  window.spawnTimer=setInterval(spawnHeart,550);
+  for(let i=0;i<3;i++)setTimeout(spawnHeart,i*200);
+}
+function spawnHeart(){
+  const zone=document.getElementById("heartZone");if(!zone)return;
+  const b=document.createElement("button");b.className="heart";b.textContent=["♥","♡","✦"][Math.floor(Math.random()*3)];
+  b.style.left=Math.random()*90+"%";b.style.animationDuration=(1.8+Math.random()*1.5)+"s";
+  b.onclick=()=>{catchScore++;document.getElementById("score").textContent=catchScore;b.remove()};
+  zone.appendChild(b);setTimeout(()=>b.remove(),3500);
+}
+
+function openEnvelope(){
+  const env=document.getElementById("envelope");
+  if(env.classList.contains("open"))return;
+  env.classList.add("open");
+  document.getElementById("envHint").textContent="Pesannya sudah terbuka ♡";
+  document.getElementById("continueBtn").classList.remove("hidden");
+  celebrate();
+}
+function showFinal(){
+  envelopeScreen.classList.remove("active");
+  finalScreen.classList.add("active");
+  celebrate();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function celebrate(){
+  const box=document.getElementById("confetti");
+  box.innerHTML="";
+  for(let i=0;i<80;i++){
+    const p=document.createElement("i");
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDelay=Math.random()*1.2+"s";
+    p.style.animationDuration=(2+Math.random()*2.5)+"s";
+    p.style.transform=`rotate(${Math.random()*360}deg)`;
+    box.appendChild(p);
+  }
+  setTimeout(()=>box.innerHTML="",5000);
+}
+document.getElementById("musicBtn").onclick=()=>{
+  if(music.paused){music.play().catch(()=>{});document.getElementById("musicBtn").textContent="Ⅱ"}
+  else{music.pause();document.getElementById("musicBtn").textContent="♪"}
+};
+</script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -67,7 +68,17 @@ button:hover{transform:translateY(-2px)}
   position:relative;height:310px;max-width:650px;margin:auto;overflow:hidden;
   border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.15)
 }
-.heart{position:absolute;font-size:30px;background:none;border:0;animation:fall linear forwards}
+
+/* HANYA WARNA LOVE YANG DIUBAH */
+.heart{
+  position:absolute;
+  font-size:30px;
+  background:none;
+  border:0;
+  color:#ff5fa2;
+  animation:fall linear forwards
+}
+
 @keyframes fall{from{transform:translateY(-50px) rotate(0)}to{transform:translateY(360px) rotate(180deg)}}
 .score{font-weight:800;color:var(--pink)}
 .envelope-wrap{text-align:center}
@@ -133,6 +144,7 @@ button:hover{transform:translateY(-2px)}
 </style>
 </head>
 <body>
+
 <div class="glow"></div><div class="glow two"></div>
 <audio id="music" src="musik.mp3" loop preload="auto"></audio>
 <button class="music" id="musicBtn" title="Musik">♪</button>
@@ -278,6 +290,7 @@ function numberGame(el){
     <div class="feedback" id="guessFeedback"></div>
     <button class="primary" onclick="guessNumber()">Tebak</button>`;
 }
+
 function guessNumber(){
   const v=Number(document.getElementById("guess").value);
   const f=document.getElementById("guessFeedback");
@@ -294,6 +307,7 @@ function memoryGame(el){
     <div class="memory-grid">${symbols.map((s,i)=>`<button class="memory" data-i="${i}" data-v="${s}" onclick="flipMemory(this)">?</button>`).join("")}</div>
     <div class="feedback" id="memoryFeedback"></div>`;
 }
+
 function flipMemory(btn){
   const i=Number(btn.dataset.i);
   if(memoryMatched.includes(i)||memoryOpen.includes(i)||memoryOpen.length===2)return;
@@ -331,6 +345,7 @@ function catchGame(el){
   window.spawnTimer=setInterval(spawnHeart,550);
   for(let i=0;i<3;i++)setTimeout(spawnHeart,i*200);
 }
+
 function spawnHeart(){
   const zone=document.getElementById("heartZone");if(!zone)return;
   const b=document.createElement("button");b.className="heart";b.textContent=["♥","♡","✦"][Math.floor(Math.random()*3)];
@@ -347,12 +362,14 @@ function openEnvelope(){
   document.getElementById("continueBtn").classList.remove("hidden");
   celebrate();
 }
+
 function showFinal(){
   envelopeScreen.classList.remove("active");
   finalScreen.classList.add("active");
   celebrate();
   window.scrollTo({top:0,behavior:"smooth"});
 }
+
 function celebrate(){
   const box=document.getElementById("confetti");
   box.innerHTML="";
@@ -366,6 +383,7 @@ function celebrate(){
   }
   setTimeout(()=>box.innerHTML="",5000);
 }
+
 document.getElementById("musicBtn").onclick=()=>{
   if(music.paused){music.play().catch(()=>{});document.getElementById("musicBtn").textContent="Ⅱ"}
   else{music.pause();document.getElementById("musicBtn").textContent="♪"}
@@ -373,3 +391,4 @@ document.getElementById("musicBtn").onclick=()=>{
 </script>
 </body>
 </html>
+```
